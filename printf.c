@@ -27,23 +27,23 @@ int _printf(const char *format, ...)
 			if (*ptr == 'c')
 				int c = va_arg(args, int);
 
-				putchar(c);
+				_putchar(c);
 				count++;
 			else if (*ptr == 's')
 			{
 				char *s = va_arg(args, char *);
 
 				while (*s != '\0')
-					putchar(*s);
+					_putchar(*s);
 					s++;
 					count++;
 			}
 			else if (*ptr == '%')
-				putchar('%');
+				_putchar('%');
 				count++;
 		}
 		else
-			putchar(*ptr);
+			_putchar(*ptr);
 			count++;
 		ptr++;
 	}
