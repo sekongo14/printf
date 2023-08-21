@@ -13,12 +13,13 @@ int _printf(const char *format, ...) {
     while (*ch != '\0') {
         if (*ch == '%') { /*Si on trouve un '%'*/ 
             ch++; /*Avance d'un caractère pour accéder au format spécifié*/ 
-
+            int len = 0;
+            int num = 0; 
             /*Gestion des spécificateurs de format*/
             switch (*ch) {
                 case 'd':
                 case 'i':
-                    // Gestion du format entier
+                    /*Gestion du format entier */
                     int num = va_arg(args, int); /*Récupération de l'entier*/ 
                     len += printf("%d", num); /*Impression et mise à jour de la longueur*/ 
                     break;
