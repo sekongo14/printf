@@ -3,11 +3,8 @@
 
 
 int _printf(const char *format, ...) {
-    va_list args; /*Liste d'arguments variables */
-        va_start(args, format); /*Initialisation de la liste d'arguments*/ 
-
-    int len = 0; /*Variable pour stocker la longueur totale des caractères imprimés*/ 
-    const char *ch = format; /*Pointeur pour parcourir le format*/ 
+    int len = 0;
+    const char *ch = format;
     int num = 0;
     unsigned int u_num = 0;
     unsigned int octal_num = 0;
@@ -15,6 +12,10 @@ int _printf(const char *format, ...) {
     char *str = NULL;
     void *ptr = NULL;
     int character = 0;
+    va_list args; /*Liste d'arguments variables */
+    va_start(args, format); /*Initialisation de la liste d'arguments*/ 
+
+    
     /* Parcours du format caractère par caractère */ 
     while (*ch != '\0') {
         if (*ch == '%') { /*Si on trouve un '%'*/ 
@@ -63,7 +64,7 @@ int _printf(const char *format, ...) {
                     len += printf("%%"); /*Impression du caractère '%' et mise à jour de la longueur*/ 
                     break;
                 default:
-                    len += printf("Unknown format specifier"); /*Gestion du spécificateur inconnu*/ 
+                    len += printf("%r"); /*Gestion du spécificateur inconnu*/ 
             }
         } else {
             putchar(*ch); /*Impression du caractère actuel*/ 
