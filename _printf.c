@@ -8,45 +8,49 @@ int _printf(const char *format, ...) {
 
     int len = 0; /*Variable pour stocker la longueur totale des caractères imprimés*/ 
     const char *ch = format; /*Pointeur pour parcourir le format*/ 
-
+    int num = 0;
+    unsigned int u_num = 0;
+    unsigned int octal_num = 0;
+    unsigned int hex_num;
+    char *str = NULL;
+    int character;
     /* Parcours du format caractère par caractère */ 
     while (*ch != '\0') {
         if (*ch == '%') { /*Si on trouve un '%'*/ 
             ch++; /*Avance d'un caractère pour accéder au format spécifié*/ 
-            int len = 0;
-            int num = 0; 
+            
             /*Gestion des spécificateurs de format*/
             switch (*ch) {
                 case 'd':
                 case 'i':
                     /*Gestion du format entier */
-                    int num = va_arg(args, int); /*Récupération de l'entier*/ 
+                    num = va_arg(args, int); /*Récupération de l'entier*/ 
                     len += printf("%d", num); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case 'u':
                     /*Gestion du format entier non signé*/ 
-                    unsigned int u_num = va_arg(args, unsigned int); /*Récupération de l'entier non signé*/ 
+                    u_num = va_arg(args, unsigned int); /*Récupération de l'entier non signé*/ 
                     len += printf("%u", u_num); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case 'o':
                     /*Gestion du format octal non signé*/ 
-                    unsigned int octal_num = va_arg(args, unsigned int); /*Récupération de l'entier non signé*/ 
+                    octal_num = va_arg(args, unsigned int); /*Récupération de l'entier non signé*/ 
                     len += printf("%o", octal_num); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case 'x':
                 case 'X':
                     /*Gestion du format hexadécimal non signé*/ 
-                    unsigned int hex_num = va_arg(args, unsigned int); /*Récupération de l'entier non signé*/ 
+                    hex_num = va_arg(args, unsigned int); /*Récupération de l'entier non signé*/ 
                     len += printf((*ch == 'x') ? "%x" : "%X", hex_num); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case 'c':
                     /*Gestion du format caractère*/ 
-                    int character = va_arg(args, int); /*Récupération du caractère*/ 
+                    character = va_arg(args, int); /*Récupération du caractère*/ 
                     len += printf("%c", character); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case 's':
                     /*Gestion du format chaîne de caractères*/ 
-                    char *str = va_arg(args, char *); /*Récupération de la chaîne de caractères*/ 
+                    *str = va_arg(args, char *); /*Récupération de la chaîne de caractères*/ 
                     len += printf("%s", str); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case 'p':
@@ -61,7 +65,7 @@ int _printf(const char *format, ...) {
                     len += printf("Unknown format specifier"); /*Gestion du spécificateur inconnu*/ 
             }
         } else {
-            putchar(*ch); /*Impression du caractère actuel*/ 
+            _putchar(*ch); /*Impression du caractère actuel*/ 
             len++; /*Mise à jour de la longueur*/ 
         }
         ch++; /*Passage au caractère suivant dans le format*/ 
