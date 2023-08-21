@@ -11,9 +11,10 @@ int _printf(const char *format, ...) {
     int num = 0;
     unsigned int u_num = 0;
     unsigned int octal_num = 0;
-    unsigned int hex_num;
+    unsigned int hex_num = 0;
     char *str = NULL;
-    int character;
+    void *ptr = NULL;
+    int character = 0;
     /* Parcours du format caractère par caractère */ 
     while (*ch != '\0') {
         if (*ch == '%') { /*Si on trouve un '%'*/ 
@@ -50,12 +51,12 @@ int _printf(const char *format, ...) {
                     break;
                 case 's':
                     /*Gestion du format chaîne de caractères*/ 
-                    *str = va_arg(args, char *); /*Récupération de la chaîne de caractères*/ 
+                    str = va_arg(args, char *); /*Récupération de la chaîne de caractères*/ 
                     len += printf("%s", str); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case 'p':
                     /*Gestion du format pointeur*/ 
-                    void *ptr = va_arg(args, void *); /*Récupération du pointeur*/ 
+                    ptr = va_arg(args, void *); /*Récupération du pointeur*/ 
                     len += printf("%p", ptr); /*Impression et mise à jour de la longueur*/ 
                     break;
                 case '%':
@@ -65,7 +66,7 @@ int _printf(const char *format, ...) {
                     len += printf("Unknown format specifier"); /*Gestion du spécificateur inconnu*/ 
             }
         } else {
-            _putchar(*ch); /*Impression du caractère actuel*/ 
+            putchar(*ch); /*Impression du caractère actuel*/ 
             len++; /*Mise à jour de la longueur*/ 
         }
         ch++; /*Passage au caractère suivant dans le format*/ 
